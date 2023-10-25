@@ -17,10 +17,10 @@ count = 0
 for product_link in product_links:
     try:
         driver.get(product_link)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'zoomImg')))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'className'))) #className is the class name of the image element and has to be replaced with the actual class name
         page_source = driver.page_source
         tree = html.fromstring(page_source)
-        zoom_img_element = tree.xpath('//img[contains(@class, "zoomImg")]')
+        zoom_img_element = tree.xpath('//img[contains(@class, "className")]') #className to be replaced
 
         if zoom_img_element:
             image_src = zoom_img_element[0].get('src')
@@ -31,6 +31,6 @@ for product_link in product_links:
             print("Image source not found on", product_link)
 
     except TimeoutException:
-        print("Timed out while waiting for 'zoomImg' element on", product_link)
+        print("Timed out while waiting for 'className' element on", product_link) #className to be replaced
 
 driver.quit()
